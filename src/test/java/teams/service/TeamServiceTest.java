@@ -36,7 +36,7 @@ public class TeamServiceTest {
 
     @Test
     public void getTeamsList() throws Exception {
-        assertThat(teamService.getTeams().size(), is(equalTo(2)));
+        assertThat(teamService.getTeams().size(), is(equalTo(3)));
     }
 
     @Test
@@ -59,6 +59,6 @@ public class TeamServiceTest {
     public void shouldDeleteTeamByName() throws Exception {
         teamService.deleteTeam("California");
 
-        assertThat(teamService.getTeams().size(), is(equalTo(1)));
+        assertThat(teamService.getTeams().size(), is(equalTo(2)));
     }
 }

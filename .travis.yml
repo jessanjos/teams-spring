@@ -1,3 +1,8 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
+deploy:
+  provider: heroku
+  app: teams-spring
+  api_key:
+    secure: xyD4TM7VazRgZnLkuHKVskPGgiiEmepf7YKum1cmjYTCWcVyhSh2BpYd0CHYKktXDVUukH8X6BjTaMiHVJ+8Cmtcz72NFFKJH+ajMNtEhXj/f//qmT7GiGxjlkXYRu3J72O+VoMV29CXVOawE+8de4AeP/KDHJ4Cw3TlWHp+D1fYc+ABDi5zuCax+3Ij4yn8IBeo+2cIagRz0a9h1Yf2z0Gr5ydFuH0chh9+memtb7bsVdoM1efH7Rc7og3KKzBFfgaV2bY+ELUvRd+0hauykBmRC0QBL5y3Nr5Z3Dwkly4dTgSk+NY1zzfY28jvf5JDTQdNVx75FxboBKD2sXMnUilOVChHR0aj2xWxNj61Liwbcg11KFCtFnsy78HiH4swCt5WWRXYeN9rWJg7jj+0mn/8VKg6z3AgsVk2vK2a5zac8NcsuHIx2FK8LZi3TURmRdnqYiKPP/+iFJ9LH5m+9gcgtorOHTrzH7sDzSG3fr+E00rqiSr+RYehi0N98qmCUQYCwo8ARmmU7fWEyv8qtjaFpvakBB3OCYujeLUV+U+BbFPesIkOj3jm8xTvR6un36iCnIK5oe62QlTjrgI1v3UR1xibWLZCxgxPTozPeTg9vvORycJiuSWbU+55g60OlVrOrnkS6gLmskak0f0M/NogrxmqOzUibVgYClJvXtk=

@@ -31,6 +31,11 @@ public class TeamRepositoryFake {
             add(new Player("Scooby", "pitcher"));
             add(new Player("Salsicha", "shortstop"));
         }}));
+
+        teams.add(new Team(UUID.randomUUID(), "Detroit", "Steven Universe", new HashSet<Player>() {{
+            add(new Player("Steven", "pitcher"));
+            add(new Player("Garnet", "shortstop"));
+        }}));
     }
 
     public List<Team> findAll() {
