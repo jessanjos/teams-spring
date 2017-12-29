@@ -61,9 +61,4 @@ public class TeamServiceTest {
 
         assertThat(teamService.getTeams().size(), is(equalTo(1)));
     }
-
-    @Test
-    public void shouldNotWork() throws Exception {
-        assertThat(teamService.getTeamByName("NotAState").getName(), is(equalTo("NotAState  ")));
-    }
 }
