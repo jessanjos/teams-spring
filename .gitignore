@@ -10,3 +10,5 @@
 
 gradle/
 .DS_Store
+out/
+build/

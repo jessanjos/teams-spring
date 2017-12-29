@@ -1,25 +1,26 @@
 package teams.service;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import teams.domain.Player;
 import teams.domain.Team;
-import teams.repository.TeamRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.UUID;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class TeamServiceTest {
-    private TeamService teamService;
 
-    @Before
-    public void setUp() throws Exception {
-        teamService = new TeamService(new TeamRepository());
-    }
+    @Autowired
+    private TeamService teamService;
 
     @Test
     public void getCaliforniaTeamByName() throws Exception {
@@ -35,21 +36,11 @@ public class TeamServiceTest {
 
     @Test
     public void shouldCreateTeamBasedOnMap() throws Exception {
-        Map<String, Object> teamToCreate = new HashMap<String, Object>() {{
-            put("name", "Florida");
-            put("location", "Universe");
-            put("mascott", "Lion");
-            put("players", new ArrayList<Map<String, String>>() {{
-                add(new HashMap<String, String>() {{
-                    put("name", "Steven");
-                    put("position", "pitcher");
+        Team teamToCreate = new Team(UUID.randomUUID(), "Florida", "Universe", "Lion",
+                new HashSet<Player>() {{
+                    add(new Player("Steve", "pitcher"));
+                    add(new Player("Garnet", "catcher"));
                 }});
-                add(new HashMap<String, String>() {{
-                    put("name", "Garnet");
-                    put("position", "catcher");
-                }});
-            }});
-        }};
 
         Team newTeam = teamService.createTeam(teamToCreate);
 
@@ -57,5 +48,12 @@ public class TeamServiceTest {
         assertThat(newTeam.getLocation(), is(equalTo("Universe")));
         assertThat(newTeam.getMascott(), is(equalTo("Lion")));
         assertThat(newTeam.getPlayers().size(), is(equalTo(2)));
+    }
+
+    @Test
+    public void shouldDeleteTeamByName() throws Exception {
+        teamService.deleteTeam("California");
+
+        assertThat(teamService.getTeams().size(), is(equalTo(1)));
     }
 }

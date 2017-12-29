@@ -1,19 +1,18 @@
 package teams.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import teams.domain.Player;
 import teams.domain.Team;
 import teams.repository.TeamRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TeamService {
-    private TeamRepository teamRepository;
 
-    TeamService(TeamRepository teamRepository) {
-        this.teamRepository = teamRepository;
-    }
+    @Autowired
+    private TeamRepository teamRepository;
 
     public Team getTeamByName(String name) {
         return teamRepository.findByName(name);
@@ -23,19 +22,17 @@ public class TeamService {
         return teamRepository.findAll();
     }
 
-    public Team createTeam(Map<String, Object> teamToCreate) {
-        String name = (String) teamToCreate.get("name");
-        String location = (String) teamToCreate.get("location");
-        String mascott = (String) teamToCreate.get("mascott");
-        Set<Player> players = new HashSet<>();
+    public Team createTeam(Team teamToCreate) {
+        Team team = new Team(UUID.randomUUID(),
+                teamToCreate.getName(),
+                teamToCreate.getLocation(),
+                teamToCreate.getMascott(),
+                teamToCreate.getPlayers());
 
-        for (Map<String, String> player : (List<Map<String, String>>) teamToCreate.get("players")) {
-            String playerName = player.get("name");
-            String playerPosition = player.get("position");
+        return teamRepository.save(team);
+    }
 
-            players.add(new Player(playerName, playerPosition));
-        }
-
-        return teamRepository.save(new Team(name, location, mascott, players));
+    public Team deleteTeam(String name) {
+        return teamRepository.deleteByName(name);
     }
 }
