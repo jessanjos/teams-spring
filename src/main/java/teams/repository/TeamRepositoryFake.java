@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class TeamRepositoryTemporary {
+public class TeamRepositoryFake {
 
     private List<Team> teams;
 
-    public TeamRepositoryTemporary() {
+    public TeamRepositoryFake() {
         teams = new ArrayList<>();
 
         init();
@@ -53,7 +53,13 @@ public class TeamRepositoryTemporary {
         return null;
     }
 
-    public boolean deleteByName(String name) {
-        return teams.remove(findByName(name));
+    public Team deleteByName(String name) {
+        Team teamToDelete = findByName(name);
+
+        if(teams.remove(findByName(name))) {
+          return teamToDelete;
+        }
+
+        return null;
     }
 }

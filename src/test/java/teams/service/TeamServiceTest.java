@@ -1,12 +1,13 @@
 package teams.service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import teams.domain.Player;
 import teams.domain.Team;
+import teams.repository.TeamRepositoryFake;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -19,8 +20,12 @@ import static org.junit.Assert.assertThat;
 @SpringBootTest
 public class TeamServiceTest {
 
-    @Autowired
     private TeamService teamService;
+
+    @Before
+    public void setUp() throws Exception {
+        teamService = new TeamService(new TeamRepositoryFake());
+    }
 
     @Test
     public void getCaliforniaTeamByName() throws Exception {
