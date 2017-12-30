@@ -35,9 +35,9 @@ public class TeamsController {
     @RequestMapping(value = "/teams/{name}", method = RequestMethod.DELETE)
     public Map<String, String> deleteTeamByName(@PathVariable String name) {
 
-        Team isTeamDeleted = teamService.deleteTeam(name);
+        long isTeamDeleted = teamService.deleteTeam(name);
 
-        if (isTeamDeleted == null) {
+        if (isTeamDeleted == 0) {
             return new HashMap<String, String>() {{
                 put("message", "Team could not be deleted");
             }};

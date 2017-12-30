@@ -3,7 +3,7 @@ package teams.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import teams.domain.Team;
-import teams.repository.TeamRepositoryFake;
+import teams.repository.TeamRepository;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,10 +11,10 @@ import java.util.UUID;
 @Service
 public class TeamService {
 
-    private TeamRepositoryFake teamRepository;
+    private TeamRepository teamRepository;
 
     @Autowired
-    public TeamService(TeamRepositoryFake teamRepository) {
+    TeamService(TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
     }
 
@@ -36,7 +36,7 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
-    public Team deleteTeam(String name) {
+    public long deleteTeam(String name) {
         return teamRepository.deleteByName(name);
     }
 }
